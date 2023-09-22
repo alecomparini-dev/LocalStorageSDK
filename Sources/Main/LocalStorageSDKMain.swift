@@ -7,18 +7,18 @@ import LocalStorageDetails
 
 public class LocalStorageSDKMain<T> {
     
-    private var dataProvider: ProviderStrategy<T>
+//    private var dataProvider: ProviderStrategy<T>
+//    
+//    public init(dataProvider: ProviderStrategy<T>) {
+//        self.dataProvider = dataProvider
+//    }
     
-    public init(dataProvider: ProviderStrategy<T>) {
-        self.dataProvider = dataProvider
-    }
-    
-    public func insert(_ object: T) throws -> T {
+    public func insert(dataProvider: ProviderStrategy<T>, _ object: T) throws -> T {
         return try dataProvider.insert(object)
     }
     
-    public func fetch() throws -> [T] {
-        return try dataProvider.fetch()
-    }
+//    public func fetch() throws -> [T] {
+//        return try dataProvider.fetch()
+//    }
     
 }
