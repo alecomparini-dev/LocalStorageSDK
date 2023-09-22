@@ -8,6 +8,8 @@ import LocalStorageInterfaces
 public class ProviderStrategy<T>: PersistenceProvider {
     public typealias T = T
     
+    public init() {}
+    
     public func insert(_ object: T) throws -> T {
         fatalError("The method insert, needs to be implemented by the subclasses ")
     }
