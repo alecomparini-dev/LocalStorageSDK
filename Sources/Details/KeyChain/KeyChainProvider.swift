@@ -28,7 +28,9 @@ public class KeyChainProvider<T>: ProviderStrategy<T> {
         let status = SecItemAdd(query as CFDictionary, nil)
         
         //TODO: - CREATE ERROR
-        //guard status == errSecSuccess else {throw Error  }
+        guard status == errSecSuccess else {
+            return value
+        }
         
         return value
     }
