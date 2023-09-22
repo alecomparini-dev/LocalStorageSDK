@@ -14,14 +14,44 @@ let package = Package(
         .library(name: "LocalStorageSDKMain", targets: ["LocalStorageSDKMain"]),
     ],
     
+    
     targets: [
+        
+        
+        
+        
+//  MARK: - TARGET INTERFACE ADAPTERS
+        
+        .target(
+            name: "LocalStorageInterfaces",
+            dependencies: [],
+            path: "Sources/3InterfaceAdapters/Interfaces"
+        ),
+        
+        
+   
+        
+//  MARK: - TARGET INTERFACE ADAPTERS
+        
+        .target(
+            name: "LocalStorageDetails",
+            dependencies: [
+                "LocalStorageInterfaces"
+            ],
+            path: "Sources/Details"
+        ),
+        
+        
+        
+//  MARK: - TARGET MAIN
         .target(
             name: "LocalStorageSDKMain",
-            dependencies: [],
+            dependencies: [
+                "LocalStorageDetails",
+            ],
             path: "Sources/Main"
         ),
 
-        
 
 //  MARK: - TESTS TARGETS AREA
         
