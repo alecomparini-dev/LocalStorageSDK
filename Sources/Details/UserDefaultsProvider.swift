@@ -5,7 +5,7 @@ import Foundation
 
 import LocalStorageInterfaces
 
-public class UserDefaultsProvider<T: Codable>: ProviderStrategy<T> {
+public class UserDefaultsProvider: ProviderStrategy {
     
     private let userDefaults: UserDefaults
     private let forKey: String
@@ -15,13 +15,12 @@ public class UserDefaultsProvider<T: Codable>: ProviderStrategy<T> {
         self.forKey = forKey
     }
     
-    
-    public override func insert(_ codable: T) throws -> T {
+    public override func insert<T>(_ codable: T) throws -> T {
         userDefaults.set(codable, forKey: forKey)
         return codable
     }
     
-    public override func fetch() throws -> [T] {
+    public func fetch<T>() throws -> [T] {
         return userDefaults.value(forKey: forKey) as! [T]
     }
     

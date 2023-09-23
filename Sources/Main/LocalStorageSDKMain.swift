@@ -5,15 +5,15 @@ import Foundation
 
 import LocalStorageDetails
 
-public class LocalStorageSDKMain<T> {
+public class LocalStorageSDKMain {
     
-//    private var dataProvider: ProviderStrategy<T>
-//    
-//    public init(dataProvider: ProviderStrategy<T>) {
-//        self.dataProvider = dataProvider
-//    }
+    private var dataProvider: ProviderStrategy
     
-    public func insert(dataProvider: ProviderStrategy<T>, _ object: T) throws -> T {
+    public init(dataProvider: ProviderStrategy) {
+        self.dataProvider = dataProvider
+    }
+    
+    public func insert<T>(_ object: T) throws -> T {
         return try dataProvider.insert(object)
     }
     
