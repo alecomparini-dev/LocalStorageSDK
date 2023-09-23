@@ -22,7 +22,7 @@ public class KeyChainProvider: ProviderStrategy {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
             kSecAttrAccount as String: forKey,
-            kSecValueData as String: value
+            kSecValueData as String: Data((value as! String).utf8)
         ]
         
         let deleteQuery: [String: Any] = [
