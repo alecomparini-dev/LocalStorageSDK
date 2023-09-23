@@ -25,6 +25,13 @@ public class KeyChainProvider: ProviderStrategy {
             kSecValueData as String: value
         ]
         
+        let deleteQuery: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: forKey
+        ]
+        
+        let statusDelete = SecItemDelete(deleteQuery as CFDictionary)
+        
         let status = SecItemAdd(query as CFDictionary, nil)
         
         //TODO: - CREATE ERROR
