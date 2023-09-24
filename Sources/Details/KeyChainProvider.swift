@@ -73,7 +73,7 @@ public class KeyChainProvider: StorageProviderStrategy {
     public override func fetchById<T>(_ id: String) throws -> T? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: appName,
+            kSecAttrService as String: appName,
             kSecAttrAccount as String: id,
             kSecReturnData as String: kCFBooleanTrue as Any,
             kSecMatchLimit as String: kSecMatchLimitOne
