@@ -12,11 +12,11 @@ public class StorageProviderStrategy: PersistenceProvider {
         fatalError("The method insert, needs to be implemented by the subclasses ")
     }
     
-    public func delete<T>(_ entity: T) throws {
+    public func delete<T>(_ object: T) throws {
         fatalError("The method delete, needs to be implemented by the subclasses ")
     }
     
-    public func update<T>(_ entity: T) throws -> T {
+    public func update<T>(_ object: T) throws -> T {
         fatalError("The method update, needs to be implemented by the subclasses ")
     }
 
@@ -24,11 +24,11 @@ public class StorageProviderStrategy: PersistenceProvider {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
 
-    public func fetchByID<T>(_ id: String) throws -> T? {
+    public func fetchById<T>(_ id: String) throws -> T? {
         fatalError("The method fetchByID, needs to be implemented by the subclasses ")
     }
 
-    public func findByColumn<T, DataType>(column: String, value: DataType) async throws -> [T] {
+    public func findByColumn<T, DataType>(column: String, value: DataType) throws -> [T] {
         fatalError("The method findByColumn, needs to be implemented by the subclasses ")
     }
     

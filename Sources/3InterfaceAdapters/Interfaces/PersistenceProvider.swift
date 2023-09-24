@@ -8,7 +8,7 @@ public protocol PersistenceProvider {
     func delete<T>(_ entity: T) throws
     func update<T>(_ entity: T) throws -> T
     func fetch<T>() throws -> [T]
-    func fetchByID<T>(_ id: String) throws -> T?
+    func fetchById<T>(_ id: String) throws -> T?
     func findByColumn<T, DataType>(column: String, value: DataType) async throws -> [T]
 }
 
