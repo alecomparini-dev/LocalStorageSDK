@@ -6,7 +6,7 @@ import Security
 
 import LocalStorageInterfaces
 
-public class KeyChainProvider: ProviderStrategy {
+public class KeyChainProvider: StorageProviderStrategy {
     
     private let appName: String
     private let forKey: String
@@ -17,7 +17,7 @@ public class KeyChainProvider: ProviderStrategy {
     }
     
     
-    public override func insert<T>(_ value: T) throws -> T {
+    public override func insert<T>(_ value: T) throws -> T? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
@@ -36,13 +36,13 @@ public class KeyChainProvider: ProviderStrategy {
         
         //TODO: - CREATE ERROR
         guard status == errSecSuccess else {
-            return value
+            return nil
         }
         
         return value
     }
     
-    public func fetch<T>() throws -> [T] {
+    public override func fetch<T>() throws -> [T] {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,

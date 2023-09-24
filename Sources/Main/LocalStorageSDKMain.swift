@@ -7,9 +7,9 @@ import LocalStorageDetails
 
 public class LocalStorageSDKMain {
     
-    private var dataProvider: ProviderStrategy
+    private var dataProvider: StorageProviderStrategy
     
-    public init(dataProvider: ProviderStrategy) {
+    public init(dataProvider: StorageProviderStrategy) {
         self.dataProvider = dataProvider
     }
     
