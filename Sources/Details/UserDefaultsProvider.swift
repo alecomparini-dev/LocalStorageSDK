@@ -5,7 +5,7 @@ import Foundation
 
 import LocalStorageInterfaces
 
-public class UserDefaultsProvider: ProviderStrategy {
+public class UserDefaultsProvider: StorageProviderStrategy {
     
     private let userDefaults: UserDefaults
     private let forKey: String
@@ -20,7 +20,7 @@ public class UserDefaultsProvider: ProviderStrategy {
         return codable
     }
     
-    public func fetch<T>() throws -> [T] {
+    public override func fetch<T>() throws -> [T] {
         return userDefaults.value(forKey: forKey) as! [T]
     }
     
