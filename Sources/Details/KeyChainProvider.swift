@@ -16,6 +16,22 @@ public class KeyChainProvider: StorageProviderStrategy {
         self.forKey = forKey
     }
     
+    public override func delete<T>(_ object: T) throws {
+        let deleteQuery: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: appName,
+            kSecAttrAccount as String: object
+        ]
+        
+        let statusDelete = SecItemDelete(deleteQuery as CFDictionary)
+        
+        //TODO: - CREATE ERROR
+        guard statusDelete == errSecSuccess else {
+//            throw ""
+            return
+        }
+        
+    }
     
     public override func insert<T>(_ value: T) throws -> T? {
         let query: [String: Any] = [
@@ -25,12 +41,7 @@ public class KeyChainProvider: StorageProviderStrategy {
             kSecValueData as String: Data((value as! String).utf8)
         ]
         
-        let deleteQuery: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: forKey
-        ]
-        
-        let statusDelete = SecItemDelete(deleteQuery as CFDictionary)
+        try delete(forKey)
         
         let status = SecItemAdd(query as CFDictionary, nil)
         
