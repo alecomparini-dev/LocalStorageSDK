@@ -21,7 +21,10 @@ public class UserDefaultsProvider: StorageProviderStrategy {
     }
     
     public override func fetch<T>() throws -> [T] {
-        return userDefaults.value(forKey: forKey) as! [T]
+        if let result = userDefaults.value(forKey: forKey) as? [T] {
+            return result
+        }
+        return []
     }
     
 }
