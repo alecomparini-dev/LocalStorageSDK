@@ -15,7 +15,9 @@ public class KeyChainProvider: StorageProviderStrategy {
         self.appName = appName
         self.forKey = forKey
     }
+
     
+//  MARK: - DELETE
     public override func delete<T>(_ object: T) throws {
         let deleteQuery: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -33,6 +35,8 @@ public class KeyChainProvider: StorageProviderStrategy {
         
     }
     
+    
+//  MARK: - INSERT
     public override func insert<T>(_ value: T) throws -> T? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -53,6 +57,8 @@ public class KeyChainProvider: StorageProviderStrategy {
         return value
     }
     
+    
+//  MARK: - FETCH
     public override func fetch<T>() throws -> [T] {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -80,7 +86,8 @@ public class KeyChainProvider: StorageProviderStrategy {
         return []
     }
     
-    
+
+//  MARK: - FETCH BY ID
     public override func fetchById<T>(_ id: String) throws -> T? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
