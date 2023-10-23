@@ -11,7 +11,7 @@ let package = Package(
     ],
     
     products: [
-        .library(name: "LocalStorageSDKMain", targets: ["LocalStorageSDKMain"]),
+//        .library(name: "LocalStorageSDKMain", targets: ["LocalStorageSDKMain"]),
         .library(name: "LocalStorageSDKDetail", targets: ["LocalStorageDetails"]),
     ],
     
