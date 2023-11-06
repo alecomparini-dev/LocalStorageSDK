@@ -16,7 +16,7 @@ public class StorageProviderStrategy: PersistenceProvider {
         fatalError("The method delete, needs to be implemented by the subclasses ")
     }
     
-    public func update<T>(_ object: T) throws -> T {
+    public func update<T>(forKey: String, _ value: T) throws -> T {
         fatalError("The method update, needs to be implemented by the subclasses ")
     }
 
@@ -24,7 +24,7 @@ public class StorageProviderStrategy: PersistenceProvider {
         fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
 
-    public func fetchById<T>(_ id: String) throws -> T? {
+    public func fetchById<T>(_ key: String) throws -> T? {
         fatalError("The method fetchByID, needs to be implemented by the subclasses ")
     }
 
