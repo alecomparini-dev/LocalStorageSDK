@@ -38,7 +38,7 @@ public class KeyChainProvider: StorageProviderStrategy {
     
     
 //  MARK: - DELETE
-    public override func delete(_ key: String) throws {
+    public override func delete<T>(_ key: T) throws {
         let deleteQuery: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
