@@ -9,35 +9,14 @@ import LocalStorageInterfaces
 public class KeyChainProvider: StorageProviderStrategy {
     
     private let appName: String
-    private let forKey: String
     
-    public init(appName: String, forKey: String) {
+    public init(appName: String) {
         self.appName = appName
-        self.forKey = forKey
     }
 
     
-//  MARK: - DELETE
-    public override func delete<T>(_ object: T) throws {
-        let deleteQuery: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: appName,
-            kSecAttrAccount as String: object
-        ]
-        
-        let statusDelete = SecItemDelete(deleteQuery as CFDictionary)
-        
-        //TODO: - CREATE ERROR
-        guard statusDelete == errSecSuccess else {
-//            throw ""
-            return
-        }
-        
-    }
-    
-    
 //  MARK: - INSERT
-    public override func insert<T>(_ value: T) throws -> T? {
+    public override func insert<T>(forKey: String, _ value: T) throws -> T? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
@@ -55,6 +34,23 @@ public class KeyChainProvider: StorageProviderStrategy {
         }
         
         return value
+    }
+    
+    
+//  MARK: - DELETE
+    public override func delete(_ forKey: String) throws {
+        let deleteQuery: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: appName,
+            kSecAttrAccount as String: forKey
+        ]
+        
+        let statusDelete = SecItemDelete(deleteQuery as CFDictionary)
+        
+        //TODO: - CREATE ERROR
+        guard statusDelete == errSecSuccess else {
+            return
+        }
     }
     
     
@@ -88,11 +84,11 @@ public class KeyChainProvider: StorageProviderStrategy {
     
 
 //  MARK: - FETCH BY ID
-    public override func fetchById<T>(_ id: String) throws -> T? {
+    public override func fetchById<T>(_ forKey: String) throws -> T? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
-            kSecAttrAccount as String: id,
+            kSecAttrAccount as String: forKey,
             kSecReturnData as String: kCFBooleanTrue as Any,
             kSecMatchLimit as String: kSecMatchLimitOne
         ]
