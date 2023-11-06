@@ -14,7 +14,6 @@ public protocol PersistenceProvider {
 
 public protocol PersistenceJSONProvider {
     func insert<T>(key: String, _ value: T) throws -> T?
-    func delete(key: String) throws
     func update<T>(key: String, _ value: T) throws -> T
 }
 

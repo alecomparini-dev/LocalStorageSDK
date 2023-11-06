@@ -24,7 +24,7 @@ public class KeyChainProvider: StorageProviderStrategy {
             kSecValueData as String: Data((value as! String).utf8)
         ]
         
-        try delete(key: key)
+        try delete(key)
         
         let status = SecItemAdd(query as CFDictionary, nil)
         
@@ -38,7 +38,7 @@ public class KeyChainProvider: StorageProviderStrategy {
     
     
 //  MARK: - DELETE
-    public override func delete(key: String) throws {
+    public override func delete(_ key: String) throws {
         let deleteQuery: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
