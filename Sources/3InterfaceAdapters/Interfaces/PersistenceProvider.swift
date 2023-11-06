@@ -4,11 +4,11 @@
 import Foundation
 
 public protocol PersistenceProvider {
-    func insert<T>(_ object: T) throws -> T?
-    func delete<T>(_ object: T) throws
+    func insert<T>(forKey: String, _ value: T) throws -> T?
+    func delete(_ object: String) throws
     func update<T>(_ object: T) throws -> T
     func fetch<T>() throws -> [T]
-    func fetchById<T>(_ id: String) throws -> T?
+    func fetchById<T>(_ forKey: String) throws -> T?
     func findByColumn<T, DataType>(column: String, value: DataType) async throws -> [T]
 }
 

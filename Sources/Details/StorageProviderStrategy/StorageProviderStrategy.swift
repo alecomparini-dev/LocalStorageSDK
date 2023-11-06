@@ -8,11 +8,11 @@ import LocalStorageInterfaces
 public class StorageProviderStrategy: PersistenceProvider {
     public init() {}
     
-    public func insert<T>(_ object: T) throws -> T? {
+    public func insert<T>(forKey: String, _ value: T) throws -> T? {
         fatalError("The method insert, needs to be implemented by the subclasses ")
     }
     
-    public func delete<T>(_ object: T) throws {
+    public func delete(_ forKey: String) throws {
         fatalError("The method delete, needs to be implemented by the subclasses ")
     }
     
