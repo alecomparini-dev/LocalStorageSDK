@@ -13,24 +13,24 @@ public class LocalStorageSDKMain {
         self.dataProvider = dataProvider
     }
     
-    public func insert<T>(forKey: String, _ value: T) throws -> T?  {
-        return try dataProvider.insert(forKey: forKey, value)
+    public func insert<T>(_ object: T) throws -> T? {
+        return try dataProvider.insert(object)
     }
     
-    public func delete(_ forKey: String) throws {
-        return try dataProvider.delete(forKey)
+    public func delete<T>(_ object: T) throws {
+        return try dataProvider.delete(object)
     }
     
-    public func update<T>(forKey: String, _ value: T) throws -> T {
-        return try dataProvider.update(forKey: forKey, value )
+    public func update<T>(_ object: T) throws -> T {
+        return try dataProvider.update(object)
     }
 
     public func fetch<T>() throws -> [T] {
         return try dataProvider.fetch()
     }
 
-    public func fetchById<T>(_ key: String) throws -> T? {
-        return try dataProvider.fetchById(key)
+    public func fetchById<T>(_ id: String) throws -> T? {
+        return try dataProvider.fetchById(id)
     }
 
     public func findByColumn<T, DataType>(column: String, value: DataType) throws -> [T] {

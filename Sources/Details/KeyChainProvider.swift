@@ -9,22 +9,22 @@ import LocalStorageInterfaces
 public class KeyChainProvider: StorageProviderStrategy {
     
     private let appName: String
-    
+   
     public init(appName: String) {
         self.appName = appName
     }
 
     
 //  MARK: - INSERT
-    public override func insert<T>(forKey: String, _ value: T) throws -> T? {
+    public override func insert<T>(key: String, _ value: T) throws -> T? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
-            kSecAttrAccount as String: forKey,
+            kSecAttrAccount as String: key,
             kSecValueData as String: Data((value as! String).utf8)
         ]
         
-        try delete(forKey)
+        try delete(key: key)
         
         let status = SecItemAdd(query as CFDictionary, nil)
         
@@ -38,11 +38,11 @@ public class KeyChainProvider: StorageProviderStrategy {
     
     
 //  MARK: - DELETE
-    public override func delete(_ forKey: String) throws {
+    public override func delete(key: String) throws {
         let deleteQuery: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
-            kSecAttrAccount as String: forKey
+            kSecAttrAccount as String: key
         ]
         
         let statusDelete = SecItemDelete(deleteQuery as CFDictionary)
