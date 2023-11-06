@@ -17,18 +17,12 @@ public class KeyChainProvider: StorageProviderStrategy {
     
 //  MARK: - INSERT
     public override func insert<T>(key: String, _ value: T) throws -> T? {
-        var secValueData = Data()
-        do {
-            secValueData = try JSONEncoder().encode(value as? [String])
-        } catch  {
-            secValueData = Data((value as! String).utf8)
-        }
         
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
             kSecAttrAccount as String: key,
-            kSecValueData as String: secValueData
+            kSecValueData as String: try JSONEncoder().encode(value as? [String])
         ]
         
         try delete(key)
@@ -96,7 +90,7 @@ public class KeyChainProvider: StorageProviderStrategy {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
             kSecAttrAccount as String: forKey,
-            kSecReturnData as String: kCFBooleanTrue as Any,
+            kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne
         ]
         
@@ -107,7 +101,7 @@ public class KeyChainProvider: StorageProviderStrategy {
             return nil
         }
             
-        return String(data: valueData, encoding: .utf8) as? T
+        return try? JSONDecoder().decode([String].self, from: valueData) as? T
         
     }
     
