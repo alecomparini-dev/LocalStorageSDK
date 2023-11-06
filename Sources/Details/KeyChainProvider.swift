@@ -17,11 +17,18 @@ public class KeyChainProvider: StorageProviderStrategy {
     
 //  MARK: - INSERT
     public override func insert<T>(key: String, _ value: T) throws -> T? {
+        var secValueData = Data()
+        do {
+            secValueData = try JSONEncoder().encode(value as? [String])
+        } catch  {
+            secValueData = Data((value as! String).utf8)
+        }
+        
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: appName,
             kSecAttrAccount as String: key,
-            kSecValueData as String: Data((value as! String).utf8)
+            kSecValueData as String: secValueData
         ]
         
         try delete(key)
