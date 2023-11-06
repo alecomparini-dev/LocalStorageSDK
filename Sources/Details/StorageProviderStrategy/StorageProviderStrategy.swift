@@ -13,10 +13,6 @@ public class StorageProviderStrategy: PersistenceProvider, PersistenceJSONProvid
         fatalError("The method insert, needs to be implemented by the subclasses ")
     }
     
-    public func delete(_ id: String) throws {
-        fatalError("The method delete, needs to be implemented by the subclasses ")
-    }
-    
     public func delete<T>(_ object: T) throws {
         fatalError("The method delete, needs to be implemented by the subclasses ")
     }
